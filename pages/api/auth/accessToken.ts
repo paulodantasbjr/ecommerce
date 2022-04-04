@@ -2,9 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { verify } from 'jsonwebtoken'
 
-import User from '../../../models/userModel'
-import { connectDB } from '../../../utils/connectDB'
 import { createAccessToken } from '../../../utils/generateToken'
+import { connectDB } from '../../../utils/connectDB'
+import { User } from '../../../models/userModel'
 
 connectDB()
 
@@ -23,13 +23,14 @@ export default async function handler(
           'Seu token esta incorreto ou expirado, por favor logue novamente!',
       })
 
-    const user = await User.findById(verifyToken.id)
+    const user = await User.findById(verifyToken.email)
+
     if (!user)
       return res
         .status(400)
         .json({ error: 'Usuario nao encontrado, por favor logue novamente' })
 
-    const accessToken = createAccessToken({ id: user._id })
+    const accessToken = createAccessToken({ email: user.email })
 
     res.json({
       success: 'Logado com sucesso',

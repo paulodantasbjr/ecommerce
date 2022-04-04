@@ -1,9 +1,8 @@
 import { ACTIONS } from './Actions'
 
-export const reducers = (
-  state: any,
-  action: { type: string; payload: any }
-) => {
+import { Action, State } from '../types/Reducers'
+
+export const reducers = (state: State, action: Action) => {
   switch (action.type) {
     case ACTIONS.AUTH:
       return {

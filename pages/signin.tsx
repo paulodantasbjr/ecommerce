@@ -1,12 +1,16 @@
+import { useContext, useState, useEffect } from 'react'
+
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
+
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 import Cookie from 'js-cookie'
-import { useContext, useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { postData } from '../service'
+
 import { GlobalContext } from '../store/GlobalState'
+import { postData } from '../service'
 
 const Signin: NextPage = () => {
   const initialState = { email: '', password: '' }
@@ -89,7 +93,7 @@ const Signin: NextPage = () => {
                   value={userData.email}
                   onChange={handleChangeInput}
                   placeholder="Email"
-                  className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="auth-input"
                 />
               </div>
               <div className="mt-4">
@@ -102,20 +106,15 @@ const Signin: NextPage = () => {
                   value={userData.password}
                   onChange={handleChangeInput}
                   placeholder="Senha"
-                  className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="auth-input"
                 />
               </div>
               <div className="flex items-baseline justify-between">
-                <button
-                  type="submit"
-                  className="mt-4 rounded-lg bg-sky-600 px-6 py-2 text-white hover:bg-sky-400"
-                >
+                <button type="submit" className="auth-button">
                   Login
                 </button>
                 <Link href="/register">
-                  <a className="text-sm text-sky-500 hover:text-sky-400 hover:underline">
-                    Cadastrar-se
-                  </a>
+                  <a className="auth-link--page">Cadastrar-se</a>
                 </Link>
               </div>
             </div>

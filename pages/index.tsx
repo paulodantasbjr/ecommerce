@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+
 import { useTheme } from 'next-themes'
 
 const Home: NextPage = () => {

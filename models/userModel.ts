@@ -1,6 +1,8 @@
-import mongoose from 'mongoose'
+import { Schema, model, models } from 'mongoose'
 
-const userSchema = new mongoose.Schema(
+import { UserModelProps } from '../types/UserModel'
+
+const userSchema = new Schema<UserModelProps>(
   {
     name: {
       type: String,
@@ -34,5 +36,6 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-let Dataset = mongoose.models.user || mongoose.model('user', userSchema)
-export default Dataset
+const userModel = models.user || model<UserModelProps>('user', userSchema)
+
+export const User = userModel

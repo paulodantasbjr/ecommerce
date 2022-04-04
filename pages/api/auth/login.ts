@@ -2,12 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { compare } from 'bcrypt'
 
-import User from '../../../models/userModel'
-import { connectDB } from '../../../utils/connectDB'
 import {
   createAccessToken,
   createRefreshToken,
 } from '../../../utils/generateToken'
+import { connectDB } from '../../../utils/connectDB'
+import { User } from '../../../models/userModel'
 
 connectDB()
 
@@ -35,8 +35,8 @@ const login = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!isPasswordMatch)
       return res.status(400).json({ error: 'senha incorreta' })
 
-    const accessToken = createAccessToken({ id: user._id })
-    const refreshToken = createRefreshToken({ id: user._id })
+    const accessToken = createAccessToken({ email: user.email })
+    const refreshToken = createRefreshToken({ email: user.email })
 
     res.status(200).json({
       success: 'Sucesso ao logar',

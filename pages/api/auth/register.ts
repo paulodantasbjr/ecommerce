@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { hash } from 'bcrypt'
 
-import User from '../../../models/userModel'
 import { connectDB } from '../../../utils/connectDB'
+import { User } from '../../../models/userModel'
 
 connectDB()
 

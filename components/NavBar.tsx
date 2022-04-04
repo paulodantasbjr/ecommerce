@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
-import { BiCart, BiUser, BiMenu } from 'react-icons/bi'
+import { BiMenu } from 'react-icons/bi'
 
-import { LoggedUser } from './LoggedUser'
 import { GlobalContext } from '../store/GlobalState'
+import { LoggedUser } from './LoggedUser'
 
 export const NavBar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
@@ -57,22 +57,12 @@ export const NavBar = () => {
           <ul className="mt-4 flex flex-col md:mt-0 md:flex-row md:items-center md:space-x-8 md:text-sm md:font-medium">
             <li>
               <Link href="/">
-                <a
-                  className={`${isActive(
-                    '/'
-                  )} block border-b border-gray-100 py-2 pr-4 pl-3  hover:bg-gray-50 dark:border-gray-700  dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white`}
-                >
-                  Inicio
-                </a>
+                <a className={`${isActive('/')} navbar-menu__items `}>Inicio</a>
               </Link>
             </li>
             <li>
               <Link href="/cart">
-                <a
-                  className={`${isActive(
-                    '/cart'
-                  )} block border-b border-gray-100 py-2 pr-4 pl-3  hover:bg-gray-50 dark:border-gray-700  dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white`}
-                >
+                <a className={`${isActive('/cart')} navbar-menu__items `}>
                   Carrinho
                 </a>
               </Link>
@@ -80,11 +70,7 @@ export const NavBar = () => {
             {Object.keys(state.auth).length === 0 ? (
               <li>
                 <Link href="/signin">
-                  <a
-                    className={`${isActive(
-                      '/signin'
-                    )} block border-b border-gray-100 py-2 pr-4 pl-3  hover:bg-gray-50 dark:border-gray-700  dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white`}
-                  >
+                  <a className={`${isActive('/signin')} navbar-menu__items`}>
                     Entrar
                   </a>
                 </Link>
@@ -94,6 +80,7 @@ export const NavBar = () => {
                 isUserMenuOpen={isUserMenuOpen}
                 setIsUserMenuOpen={setIsUserMenuOpen}
                 auth={state.auth}
+                isActive={isActive}
               />
             )}
           </ul>

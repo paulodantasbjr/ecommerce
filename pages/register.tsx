@@ -11,7 +11,6 @@ import { toast } from 'react-toastify'
 import { valid } from '../utils/validFields'
 import { postData } from '../service'
 
-import { UserRegisterProps } from '../types/UserRegister'
 import { GlobalContext } from '../store/GlobalState'
 
 const Register: NextPage = () => {
@@ -21,8 +20,10 @@ const Register: NextPage = () => {
     password: '',
     passwordConfirm: '',
   }
-  const [userData, setUserData] = useState<UserRegisterProps>(initialState)
+  const [userData, setUserData] = useState(initialState)
+
   const { state } = useContext(GlobalContext)
+
   const router = useRouter()
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +94,7 @@ const Register: NextPage = () => {
                   type="text"
                   value={userData.name}
                   onChange={handleChangeInput}
-                  className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="auth-input"
                 />
               </div>
               <div>
@@ -105,7 +106,7 @@ const Register: NextPage = () => {
                   type="email"
                   value={userData.email}
                   onChange={handleChangeInput}
-                  className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="auth-input"
                 />
               </div>
               <div className="mt-4">
@@ -117,7 +118,7 @@ const Register: NextPage = () => {
                   type="password"
                   value={userData.password}
                   onChange={handleChangeInput}
-                  className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="auth-input"
                 />
               </div>
               <div className="mt-4">
@@ -129,20 +130,15 @@ const Register: NextPage = () => {
                   type="password"
                   value={userData.passwordConfirm}
                   onChange={handleChangeInput}
-                  className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="auth-input"
                 />
               </div>
               <div className="flex items-baseline justify-between">
-                <button
-                  type="submit"
-                  className="mt-4 rounded-lg bg-sky-600 px-6 py-2 text-white hover:bg-sky-400"
-                >
-                  Login
+                <button type="submit" className="auth-button">
+                  Cadastrar
                 </button>
                 <Link href="/signin">
-                  <a className="text-sm text-sky-500 hover:text-sky-400 hover:underline">
-                    Signin
-                  </a>
+                  <a className="auth-link--page ">Signin</a>
                 </Link>
               </div>
             </div>

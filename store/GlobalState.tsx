@@ -1,27 +1,19 @@
-import { createContext, Dispatch, useEffect, useReducer } from 'react'
+import { createContext, useEffect, useReducer } from 'react'
 
 import { toast } from 'react-toastify'
 
-import { reducers } from './Reducer'
-import { GlobalContextProps, GlobalStateProps } from '../types/GlobalContext'
+import { DataProviderProps, GlobalContextProps } from '../types/GlobalContext'
 import { getData } from '../service'
+import { reducers } from './Reducer'
 
-const initialState = { auth: {} }
+export const GlobalContext = createContext({} as GlobalContextProps)
 
-export const GlobalContext = createContext<{
-  state: GlobalStateProps
-  dispatch: Dispatch<any>
-}>({
-  state: initialState,
-  dispatch: () => {},
-})
-
-export const DataProvider = ({ children }: GlobalContextProps) => {
+export const DataProvider = ({ children }: DataProviderProps) => {
+  const initialState = { auth: {} }
   const [state, dispatch] = useReducer(reducers, initialState)
 
   const fetchUser = async () => {
     const firstLogin = window.localStorage.getItem('firstLogin')
-
     if (firstLogin) {
       const result = await getData('auth/accessToken')
 

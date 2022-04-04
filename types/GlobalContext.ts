@@ -1,9 +1,14 @@
-import { ReactNode } from 'react'
+import { Dispatch, ReactNode } from 'react'
 
-export type GlobalStateProps = {
+type GlobalStateProps = {
   auth: {}
 }
 
 export type GlobalContextProps = {
+  state: GlobalStateProps
+  dispatch: Dispatch<any>
+}
+
+export type DataProviderProps = {
   children: ReactNode
 }

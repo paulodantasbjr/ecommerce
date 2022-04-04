@@ -1,12 +1,25 @@
-import { ThemeToggle } from './ThemeToggle'
-import Image from 'next/image'
 import { useContext } from 'react'
-import { GlobalContext } from '../store/GlobalState'
-import Cookie from 'js-cookie'
-import { toast } from 'react-toastify'
+
+import Image from 'next/image'
+import Link from 'next/link'
 import Router from 'next/router'
 
-export const LoggedUser = ({ isUserMenuOpen, setIsUserMenuOpen, auth }) => {
+import Cookie from 'js-cookie'
+import { toast } from 'react-toastify'
+
+import { GlobalContext } from '../store/GlobalState'
+import { ThemeToggle } from './ThemeToggle'
+
+import { BiLogOutCircle } from 'react-icons/bi'
+
+import { LoggedUserProps } from '../types/LoggedUser'
+
+export const LoggedUser = ({
+  isUserMenuOpen,
+  setIsUserMenuOpen,
+  auth,
+  isActive,
+}: LoggedUserProps) => {
   const { dispatch } = useContext(GlobalContext)
 
   const handleLogout = () => {
@@ -18,7 +31,7 @@ export const LoggedUser = ({ isUserMenuOpen, setIsUserMenuOpen, auth }) => {
   }
 
   return (
-    <div className="relative flex items-center md:order-2">
+    <div className="relative flex items-center">
       <button
         type="button"
         className="mr-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0"
@@ -37,9 +50,9 @@ export const LoggedUser = ({ isUserMenuOpen, setIsUserMenuOpen, auth }) => {
       <div
         className={`${
           isUserMenuOpen ? 'block' : 'hidden'
-        } absolute right-0 top-16 z-50 min-w-[15rem] list-none divide-y divide-gray-100 rounded bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700 md:top-12`}
+        } absolute right-0 top-16 z-50 min-w-[15rem] max-w-xs list-none divide-y divide-gray-100 rounded bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700 md:top-12`}
       >
-        <div className="py-3 px-4">
+        <div className="py-2 px-4">
           <span className="block text-sm text-gray-900 dark:text-white">
             {auth.user.name}
           </span>
@@ -47,14 +60,17 @@ export const LoggedUser = ({ isUserMenuOpen, setIsUserMenuOpen, auth }) => {
             {auth.user.email}
           </span>
         </div>
-        <ul className="py-1">
+        <ul className="flex flex-col gap-1">
           <li>
-            <a
-              href="#"
-              className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Perfil
-            </a>
+            <Link href="/profile">
+              <a
+                className={`navbar-logged--user__sub-items ${isActive(
+                  '/profile'
+                )} `}
+              >
+                Perfil
+              </a>
+            </Link>
           </li>
           <li>
             <ThemeToggle />
@@ -62,10 +78,9 @@ export const LoggedUser = ({ isUserMenuOpen, setIsUserMenuOpen, auth }) => {
           <li>
             <a
               onClick={handleLogout}
-              href="#"
-              className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="navbar-logged--user__sub-items flex w-full justify-center hover:text-rose-600"
             >
-              Desconectar
+              <BiLogOutCircle size={30} />
             </a>
           </li>
         </ul>
