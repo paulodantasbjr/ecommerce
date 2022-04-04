@@ -5,6 +5,7 @@ import { verify } from 'jsonwebtoken'
 import { createAccessToken } from '../../../utils/generateToken'
 import { connectDB } from '../../../utils/connectDB'
 import { User } from '../../../models/userModel'
+import { UserProps } from '../../../types/User'
 
 connectDB()
 
@@ -16,14 +17,18 @@ export default async function handler(
     const token = req.cookies.refreshToken
     if (!token) return res.status(400).json({ error: 'Por favor logue!' })
 
-    const verifyToken = verify(token, process.env.REFRESH_TOKEN_SECRET!)
-    if (!verifyToken)
+    const verifyUser = verify(
+      token,
+      process.env.REFRESH_TOKEN_SECRET!
+    ) as UserProps
+
+    if (!verifyUser)
       return res.status(400).json({
         error:
           'Seu token esta incorreto ou expirado, por favor logue novamente!',
       })
 
-    const user = await User.findById(verifyToken.email)
+    const user = await User.findOne({ email: verifyUser.email })
 
     if (!user)
       return res

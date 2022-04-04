@@ -36,7 +36,7 @@ const Signin: NextPage = () => {
         render: result.success,
         type: 'success',
         isLoading: false,
-        autoClose: 3000,
+        autoClose: 1000,
         closeButton: true,
       })
       Cookie.set('refreshToken', result.refreshToken, {
@@ -66,9 +66,7 @@ const Signin: NextPage = () => {
     }
   }
   useEffect(() => {
-    if (Object.keys(state.auth).length !== 0) {
-      router.push('/')
-    }
+    if (state.auth.token) router.push('/')
   }, [router, state.auth])
 
   return (

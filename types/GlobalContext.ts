@@ -1,7 +1,8 @@
 import { Dispatch, ReactNode } from 'react'
+import { AuthProps } from './Auth'
 
 type GlobalStateProps = {
-  auth: {}
+  auth: AuthProps
 }
 
 export type GlobalContextProps = {

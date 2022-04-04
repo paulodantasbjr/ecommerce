@@ -26,7 +26,16 @@ export const NavBar = () => {
 
   return (
     <nav className="rounded border-gray-200 bg-white px-2 py-2.5 dark:bg-gray-800 sm:px-4">
-      <div className="container mx-auto flex flex-wrap items-center justify-between">
+      <div className="container mx-auto flex flex-wrap items-center md:justify-between">
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          type="button"
+          className="mr-2 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
+        >
+          <span className="sr-only">abrir menu</span>
+          <BiMenu size={30} />
+        </button>
+
         <Link href="/">
           <a className="flex items-center gap-2">
             <Image
@@ -41,18 +50,10 @@ export const NavBar = () => {
           </a>
         </Link>
 
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          type="button"
-          className="ml-1 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
-        >
-          <span className="sr-only">abrir menu</span>
-          <BiMenu size={30} />
-        </button>
         <div
           className={`${
             isMenuOpen ? 'block' : 'hidden'
-          } w-full items-center justify-between md:order-1 md:flex md:w-auto`}
+          } w-full items-center justify-between md:flex md:w-auto`}
         >
           <ul className="mt-4 flex flex-col md:mt-0 md:flex-row md:items-center md:space-x-8 md:text-sm md:font-medium">
             <li>
@@ -67,7 +68,7 @@ export const NavBar = () => {
                 </a>
               </Link>
             </li>
-            {Object.keys(state.auth).length === 0 ? (
+            {!state.auth.token ? (
               <li>
                 <Link href="/signin">
                   <a className={`${isActive('/signin')} navbar-menu__items`}>

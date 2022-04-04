@@ -1,5 +1,4 @@
-import { ChangeEvent, FormEvent, useContext, useEffect } from 'react'
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -50,7 +49,7 @@ const Register: NextPage = () => {
         render: result.success,
         type: 'success',
         isLoading: false,
-        autoClose: 3000,
+        autoClose: 1000,
         closeButton: true,
       })
       router.push('/signin')
@@ -68,9 +67,7 @@ const Register: NextPage = () => {
   }
 
   useEffect(() => {
-    if (Object.keys(state.auth).length !== 0) {
-      router.push('/')
-    }
+    if (state.auth.token) router.push('/')
   }, [router, state.auth])
 
   return (

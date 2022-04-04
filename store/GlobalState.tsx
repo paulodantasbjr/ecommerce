@@ -9,7 +9,7 @@ import { reducers } from './Reducer'
 export const GlobalContext = createContext({} as GlobalContextProps)
 
 export const DataProvider = ({ children }: DataProviderProps) => {
-  const initialState = { auth: {} }
+  const initialState = { auth: { token: null, user: null } }
   const [state, dispatch] = useReducer(reducers, initialState)
 
   const fetchUser = async () => {
@@ -28,7 +28,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
       }
 
       if (result.error) {
-        toast.error(result.error)
+        toast.error(result.error, { autoClose: 3000, closeButton: true })
       }
     }
   }

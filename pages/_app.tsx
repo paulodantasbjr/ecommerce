@@ -7,7 +7,7 @@ import { ThemeProvider } from 'next-themes'
 import { DataProvider } from '../store/GlobalState'
 import { Layout } from '../components/Layout'
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider attribute="class">
       <DataProvider>
