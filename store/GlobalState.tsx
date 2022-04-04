@@ -3,13 +3,13 @@ import { createContext, Dispatch, useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
 
 import { reducers } from './Reducer'
-import { GlobalContextProps } from '../types/GlobalContext'
+import { GlobalContextProps, GlobalStateProps } from '../types/GlobalContext'
 import { getData } from '../service'
 
 const initialState = { auth: {} }
 
 export const GlobalContext = createContext<{
-  state: any
+  state: GlobalStateProps
   dispatch: Dispatch<any>
 }>({
   state: initialState,

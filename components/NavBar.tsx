@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -6,15 +6,15 @@ import Image from 'next/image'
 
 import { BiCart, BiUser, BiMenu } from 'react-icons/bi'
 
-import { ThemeToggle } from './ThemeToggle'
-import { User } from './User'
+import { LoggedUser } from './LoggedUser'
+import { GlobalContext } from '../store/GlobalState'
 
 export const NavBar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [auth, setAuth] = useState(false)
 
   const router = useRouter()
+  const { state } = useContext(GlobalContext)
 
   const isActive = (path: string) => {
     if (router.pathname === path) {
@@ -54,7 +54,7 @@ export const NavBar = () => {
             isMenuOpen ? 'block' : 'hidden'
           } w-full items-center justify-between md:order-1 md:flex md:w-auto`}
         >
-          <ul className="mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium">
+          <ul className="mt-4 flex flex-col md:mt-0 md:flex-row md:items-center md:space-x-8 md:text-sm md:font-medium">
             <li>
               <Link href="/">
                 <a
@@ -77,12 +77,7 @@ export const NavBar = () => {
                 </a>
               </Link>
             </li>
-            {auth ? (
-              <User
-                isUserMenuOpen={isUserMenuOpen}
-                setIsUserMenuOpen={setIsUserMenuOpen}
-              />
-            ) : (
+            {Object.keys(state.auth).length === 0 ? (
               <li>
                 <Link href="/signin">
                   <a
@@ -94,6 +89,12 @@ export const NavBar = () => {
                   </a>
                 </Link>
               </li>
+            ) : (
+              <LoggedUser
+                isUserMenuOpen={isUserMenuOpen}
+                setIsUserMenuOpen={setIsUserMenuOpen}
+                auth={state.auth}
+              />
             )}
           </ul>
         </div>

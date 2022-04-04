@@ -1,4 +1,4 @@
-import type { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent, useContext, useEffect } from 'react'
 import { useState } from 'react'
 
 import type { NextPage } from 'next'
@@ -12,6 +12,7 @@ import { valid } from '../utils/validFields'
 import { postData } from '../service'
 
 import { UserRegisterProps } from '../types/UserRegister'
+import { GlobalContext } from '../store/GlobalState'
 
 const Register: NextPage = () => {
   const initialState = {
@@ -21,7 +22,7 @@ const Register: NextPage = () => {
     passwordConfirm: '',
   }
   const [userData, setUserData] = useState<UserRegisterProps>(initialState)
-
+  const { state } = useContext(GlobalContext)
   const router = useRouter()
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,17 +64,13 @@ const Register: NextPage = () => {
         closeButton: true,
       })
     }
-
-    if (result.catchError) {
-      toast.update(id, {
-        render: result.catchError,
-        type: 'error',
-        isLoading: false,
-        autoClose: 3000,
-        closeButton: true,
-      })
-    }
   }
+
+  useEffect(() => {
+    if (Object.keys(state.auth).length !== 0) {
+      router.push('/')
+    }
+  }, [router, state.auth])
 
   return (
     <>

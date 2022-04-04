@@ -35,7 +35,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     await newUser.save()
 
     res.status(200).json({ success: 'usuario criado com sucesso' })
-  } catch (err: any) {
-    return res.status(500).json({ catchError: err.message })
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message })
   }
 }

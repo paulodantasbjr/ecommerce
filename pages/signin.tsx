@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Cookie from 'js-cookie'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { postData } from '../service'
 import { GlobalContext } from '../store/GlobalState'
@@ -14,7 +14,7 @@ const Signin: NextPage = () => {
 
   const router = useRouter()
 
-  const { dispatch } = useContext(GlobalContext)
+  const { state, dispatch } = useContext(GlobalContext)
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -35,7 +35,7 @@ const Signin: NextPage = () => {
         autoClose: 3000,
         closeButton: true,
       })
-      Cookie.set('refreshtoken', result.refreshToken, {
+      Cookie.set('refreshToken', result.refreshToken, {
         path: 'api/auth/accessToken',
         expires: 7,
       })
@@ -61,6 +61,11 @@ const Signin: NextPage = () => {
       })
     }
   }
+  useEffect(() => {
+    if (Object.keys(state.auth).length !== 0) {
+      router.push('/')
+    }
+  }, [router, state.auth])
 
   return (
     <>

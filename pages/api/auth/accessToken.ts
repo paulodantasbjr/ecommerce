@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { JwtPayload, verify } from 'jsonwebtoken'
+import { verify } from 'jsonwebtoken'
 
 import User from '../../../models/userModel'
 import { connectDB } from '../../../utils/connectDB'
@@ -13,12 +13,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const token = req.cookies.refreshtoken
+    const token = req.cookies.refreshToken
     if (!token) return res.status(400).json({ error: 'Por favor logue!' })
 
     const verifyToken = verify(token, process.env.REFRESH_TOKEN_SECRET!)
-    console.log(verifyToken)
-
     if (!verifyToken)
       return res.status(400).json({
         error:
