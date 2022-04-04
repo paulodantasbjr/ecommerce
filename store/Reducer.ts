@@ -1,12 +1,10 @@
 import { ACTIONS } from './Actions'
 
-export const reducers = (state, action) => {
+export const reducers = (
+  state: any,
+  action: { type: string; payload: any }
+) => {
   switch (action.type) {
-    case ACTIONS.NOTIFY:
-      return {
-        ...state,
-        notify: action.payload,
-      }
     case ACTIONS.AUTH:
       return {
         ...state,

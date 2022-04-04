@@ -33,15 +33,15 @@ const Register: NextPage = () => {
     e.preventDefault()
 
     const errMsg = valid(
-      userData.name,
       userData.email,
       userData.password,
+      userData.name,
       userData.passwordConfirm
     )
     if (errMsg) return toast.error(errMsg)
 
     const id = toast.loading('Carregando...')
-    const result = await postData('auth/register', userData, '123')
+    const result = await postData('auth/register', userData)
 
     if (result.success) {
       toast.update(id, {
@@ -94,6 +94,7 @@ const Register: NextPage = () => {
                 <input
                   name="name"
                   type="text"
+                  value={userData.name}
                   onChange={handleChangeInput}
                   className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
@@ -105,6 +106,7 @@ const Register: NextPage = () => {
                 <input
                   name="email"
                   type="email"
+                  value={userData.email}
                   onChange={handleChangeInput}
                   className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
@@ -116,6 +118,7 @@ const Register: NextPage = () => {
                 <input
                   name="password"
                   type="password"
+                  value={userData.password}
                   onChange={handleChangeInput}
                   className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
@@ -127,6 +130,7 @@ const Register: NextPage = () => {
                 <input
                   name="passwordConfirm"
                   type="password"
+                  value={userData.passwordConfirm}
                   onChange={handleChangeInput}
                   className="mt-2 w-full rounded-md border bg-gray-200 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />

@@ -5,15 +5,13 @@ const validateEmail = (email: string) => {
 }
 
 export const valid = (
-  name: string,
   email: string,
   password: string,
-  passwordConfirm: string
+  name?: string,
+  passwordConfirm?: string
 ) => {
   if (!name || !email || !password || !passwordConfirm)
     return 'Preencha todos os campos'
-
-  if (name.length < 7) return 'Preencha o nome e o sobrenome'
 
   if (!validateEmail(email)) return 'Email inválido'
 

@@ -12,7 +12,7 @@ import { User } from './User'
 export const NavBar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [auth, setAuth] = useState(true)
+  const [auth, setAuth] = useState(false)
 
   const router = useRouter()
 
