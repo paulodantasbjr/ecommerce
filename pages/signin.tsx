@@ -72,7 +72,7 @@ const Signin: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Logar</title>
+        <title>Login Page</title>
       </Head>
       <div className="flex min-h-screen items-center justify-center">
         <div className="mt-4 rounded  bg-white px-8 py-6 text-left shadow-lg dark:bg-gray-800">
