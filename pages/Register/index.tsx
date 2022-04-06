@@ -7,10 +7,10 @@ import Link from 'next/link'
 
 import { toast } from 'react-toastify'
 
-import { valid } from '../utils/validFields'
-import { postData } from '../service'
+import { valid } from '../../utils/validFields'
+import { postData } from '../../service'
 
-import { GlobalContext } from '../store/GlobalState'
+import { GlobalContext } from '../../store/GlobalState'
 
 const Register: NextPage = () => {
   const initialState = {

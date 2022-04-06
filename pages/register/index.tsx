@@ -1,35 +1,48 @@
-import { useContext, useState, useEffect } from 'react'
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 
 import type { NextPage } from 'next'
-
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
-import Cookie from 'js-cookie'
 import { toast } from 'react-toastify'
 
-import { GlobalContext } from '../store/GlobalState'
-import { postData } from '../service'
+import { valid } from '../../utils/validFields'
+import { postData } from '../../service'
 
-const Signin: NextPage = () => {
-  const initialState = { email: '', password: '' }
+import { GlobalContext } from '../../store/GlobalState'
+
+const Register: NextPage = () => {
+  const initialState = {
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  }
   const [userData, setUserData] = useState(initialState)
+
+  const { state } = useContext(GlobalContext)
 
   const router = useRouter()
 
-  const { state, dispatch } = useContext(GlobalContext)
-
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setUserData({ ...userData, [name]: value })
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    const errMsg = valid(
+      userData.email,
+      userData.password,
+      userData.name,
+      userData.passwordConfirm
+    )
+    if (errMsg) return toast.error(errMsg)
+
     const id = toast.loading('Carregando...')
-    const result = await postData('auth/login', userData)
+    const result = await postData('auth/register', userData)
 
     if (result.success) {
       toast.update(id, {
@@ -39,20 +52,7 @@ const Signin: NextPage = () => {
         autoClose: 1000,
         closeButton: true,
       })
-      Cookie.set('refreshToken', result.refreshToken, {
-        path: 'api/auth/accessToken',
-        expires: 7,
-      })
-
-      dispatch({
-        type: 'AUTH',
-        payload: {
-          token: result.accessToken,
-          user: result.user,
-        },
-      })
-
-      window.localStorage.setItem('firstLogin', 'true')
+      router.push('/signin')
     }
 
     if (result.error) {
@@ -65,6 +65,7 @@ const Signin: NextPage = () => {
       })
     }
   }
+
   useEffect(() => {
     if (state.auth.token) router.push('/')
   }, [router, state.auth])
@@ -72,7 +73,7 @@ const Signin: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Login Page</title>
+        <title>Register Page</title>
       </Head>
       <div className="flex min-h-screen items-center justify-center">
         <div className="mt-4 rounded  bg-white px-8 py-6 text-left shadow-lg dark:bg-gray-800">
@@ -82,6 +83,18 @@ const Signin: NextPage = () => {
           <form onSubmit={handleSubmit}>
             <div className="mt-4">
               <div>
+                <label className="block" htmlFor="name">
+                  Nome
+                </label>
+                <input
+                  name="name"
+                  type="text"
+                  value={userData.name}
+                  onChange={handleChangeInput}
+                  className="auth-input"
+                />
+              </div>
+              <div>
                 <label className="block" htmlFor="email">
                   Email
                 </label>
@@ -90,7 +103,6 @@ const Signin: NextPage = () => {
                   type="email"
                   value={userData.email}
                   onChange={handleChangeInput}
-                  placeholder="Email"
                   className="auth-input"
                 />
               </div>
@@ -103,16 +115,27 @@ const Signin: NextPage = () => {
                   type="password"
                   value={userData.password}
                   onChange={handleChangeInput}
-                  placeholder="Senha"
+                  className="auth-input"
+                />
+              </div>
+              <div className="mt-4">
+                <label htmlFor="passwordConfirm" className="block">
+                  Confirmar senha
+                </label>
+                <input
+                  name="passwordConfirm"
+                  type="password"
+                  value={userData.passwordConfirm}
+                  onChange={handleChangeInput}
                   className="auth-input"
                 />
               </div>
               <div className="flex items-baseline justify-between">
                 <button type="submit" className="auth-button">
-                  Login
+                  Cadastrar
                 </button>
-                <Link href="/register">
-                  <a className="auth-link--page">Cadastrar-se</a>
+                <Link href="/signin">
+                  <a className="auth-link--page ">Signin</a>
                 </Link>
               </div>
             </div>
@@ -123,4 +146,4 @@ const Signin: NextPage = () => {
   )
 }
 
-export default Signin
+export default Register
