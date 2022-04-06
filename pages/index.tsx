@@ -34,7 +34,7 @@ const Home: NextPage<ProductsProps> = ({ products, result }: ProductsProps) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const res = await getData('product')
 
   return {
