@@ -5,7 +5,7 @@ import { ProductItemProps } from '../types/ProductItem'
 
 export const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <Link href={`product/${product._id}`} passHref>
+    <Link href={`/product/${product._id}`} passHref>
       <div className="max-w-sm cursor-pointer rounded-lg bg-white shadow-md hover:shadow-xl dark:bg-gray-800 dark:shadow-md hover:dark:shadow-xl hover:dark:shadow-white/5">
         <Image
           src={product.images[0].url}
