@@ -28,7 +28,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
       }
 
       if (result.error) {
-        toast.error(result.error, { autoClose: 3000, closeButton: true })
+        toast.error(result.error, { autoClose: 1000, closeButton: true })
       }
     }
   }

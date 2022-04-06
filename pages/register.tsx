@@ -60,7 +60,7 @@ const Register: NextPage = () => {
         render: result.error,
         type: 'error',
         isLoading: false,
-        autoClose: 3000,
+        autoClose: 1000,
         closeButton: true,
       })
     }
