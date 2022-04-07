@@ -25,7 +25,7 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
       <Head>
         <title>{productItem.title}</title>
       </Head>
-      <div className="grid grid-cols-2 p-8">
+      <div className="grid grid-cols-1 p-2 md:grid-cols-2 md:p-8">
         <div className="flex flex-col gap-2">
           <div className="relative h-96 w-full rounded-lg border-4 border-double border-amber-500 dark:border-amber-100">
             <Image
@@ -58,7 +58,7 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
             })}
           </div>
         </div>
-        <div className="ml-8 flex flex-col gap-1">
+        <div className="flex flex-col gap-4 p-2 md:ml-8 md:p-0">
           <h2 className="block text-4xl uppercase">{product.title}</h2>
 
           <div className="mb-4 flex items-center justify-between">
@@ -69,12 +69,14 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
                 {(product.price / 10).toFixed(2)}
               </p>
             </div>
-            {product.inStock > 0 ? (
-              <p className="text-sm text-amber-600">{`Em estoque: ${product.inStock}`}</p>
-            ) : (
-              <p className="text-sm text-rose-500">Estoque</p>
-            )}
-            <p className="text-sm text-rose-500">Vendidos: {product.sold}</p>
+            <div className="flex flex-col gap-2">
+              {product.inStock > 0 ? (
+                <p className="text-sm text-amber-600">{`Em estoque: ${product.inStock}`}</p>
+              ) : (
+                <p className="text-sm text-rose-500">Estoque</p>
+              )}
+              <p className="text-sm text-rose-500">Vendidos: {product.sold}</p>
+            </div>
           </div>
 
           <p className="text-lg">{product.content}</p>
@@ -83,8 +85,8 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
             {product.description}
           </p>
 
-          <div className="mt-4 flex justify-center">
-            <button className=" rounded-3xl bg-red-500 py-2 px-8 hover:brightness-150">
+          <div className=" flex justify-center">
+            <button className=" rounded-3xl bg-red-500 py-2 px-8 text-white hover:brightness-150">
               comprar agora
             </button>
           </div>
