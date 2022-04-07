@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { BiMenu, BiHome } from 'react-icons/bi'
-import { RiShoppingCartLine } from 'react-icons/ri'
 import { FaSignInAlt } from 'react-icons/fa'
+import { RiShoppingCartLine } from 'react-icons/ri'
 
 import { GlobalContext } from '../store/GlobalState'
 import { LoggedUser } from './LoggedUser'
@@ -68,7 +68,10 @@ export const NavBar = () => {
             </li>
             <li className={`${isActive('/cart')} navbar-menu__items `}>
               <Link href="/cart">
-                <a className="flex items-center gap-1 md:flex-col">
+                <a className="relative flex items-center gap-1 md:flex-col">
+                  <span className="absolute right-0 rounded-full bg-rose-500 px-2 py-1 text-xs text-white md:-top-1 md:-right-1">
+                    {state.cart.length}
+                  </span>
                   <RiShoppingCartLine size={20} />
                   Carrinho
                 </a>

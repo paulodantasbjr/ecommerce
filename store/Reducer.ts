@@ -9,6 +9,11 @@ export const reducers = (state: State, action: Action) => {
         ...state,
         auth: action.payload,
       }
+    case ACTIONS.CART:
+      return {
+        ...state,
+        cart: action.payload,
+      }
     default:
       return state
   }

@@ -1,23 +1,38 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import type { GetServerSideProps } from 'next'
+
 import Head from 'next/head'
 import Image from 'next/image'
 
 import { FaCcPaypal } from 'react-icons/fa'
 
+import { addCart } from '../../utils/addCart'
+import { GlobalContext } from '../../store/GlobalState'
 import { getData } from '../../service'
 
+import { Action } from '../../types/Reducers'
 import { ProductItemProps } from '../../types/ProductItem'
 
 const DetailsProduct = ({ product }: ProductItemProps) => {
   const [productItem] = useState(product)
   const [tab, setTab] = useState(0)
 
+  const { state, dispatch } = useContext(GlobalContext)
+
   const isActive = (index: number) => {
     return tab === index
       ? 'border-amber-500 dark:border-amber-100'
       : 'border-gray-300 dark:border-gray-700'
+  }
+
+  const handleCart = () => {
+    const actionAddCart = addCart(productItem, state.cart) as Action
+
+    dispatch({
+      type: actionAddCart.type,
+      payload: actionAddCart.payload,
+    })
   }
 
   return (
@@ -86,7 +101,11 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
           </p>
 
           <div className=" flex justify-center">
-            <button className=" rounded-3xl bg-red-500 py-2 px-8 text-white hover:brightness-150">
+            <button
+              type="button"
+              onClick={handleCart}
+              className=" rounded-3xl bg-red-500 py-2 px-8 text-white hover:brightness-150"
+            >
               comprar agora
             </button>
           </div>
