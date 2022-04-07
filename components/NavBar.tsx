@@ -4,7 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { BiMenu, BiHome, BiCart } from 'react-icons/bi'
+import { BiMenu, BiHome } from 'react-icons/bi'
+import { RiShoppingCartLine } from 'react-icons/ri'
 import { FaSignInAlt } from 'react-icons/fa'
 
 import { GlobalContext } from '../store/GlobalState'
@@ -68,7 +69,7 @@ export const NavBar = () => {
             <li className={`${isActive('/cart')} navbar-menu__items `}>
               <Link href="/cart">
                 <a className="flex items-center gap-1 md:flex-col">
-                  <BiCart size={20} />
+                  <RiShoppingCartLine size={20} />
                   Carrinho
                 </a>
               </Link>
