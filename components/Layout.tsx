@@ -10,7 +10,7 @@ export const Layout = ({ children }: LayoutProps) => {
   const { theme } = useTheme()
 
   return (
-    <div className="container mx-auto ">
+    <div className="container mx-auto flex h-screen flex-col">
       <NavBar />
       {children}
       <ToastContainer

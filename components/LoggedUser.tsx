@@ -11,6 +11,7 @@ import { GlobalContext } from '../store/GlobalState'
 import { ThemeToggle } from './ThemeToggle'
 
 import { BiLogOutCircle } from 'react-icons/bi'
+import { ImProfile } from 'react-icons/im'
 
 import { LoggedUserProps } from '../types/LoggedUser'
 
@@ -52,20 +53,21 @@ export const LoggedUser = ({
   return (
     <div className="relative flex items-center">
       {isMobile ? (
-        <Link href="#">
-          <a
-            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-            className={`${isActive(
-              '/profile'
-            )} navbar-menu__items block w-full`}
-          >
-            Perfil
-          </a>
-        </Link>
+        <div className={`${isActive('/profile')} navbar-menu__items w-full `}>
+          <Link href="#">
+            <a
+              onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+              className="flex items-center gap-2"
+            >
+              <ImProfile size={20} />
+              {auth.user.name}
+            </a>
+          </Link>
+        </div>
       ) : (
         <button
           type="button"
-          className="mr-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0"
+          className="flex flex-col items-center text-xs md:w-10"
           onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
         >
           <span className="sr-only">abrir menu usuario</span>
@@ -76,6 +78,7 @@ export const LoggedUser = ({
             src={auth.user.avatar}
             alt={auth.user.name}
           />
+          {auth.user.name.split(' ')[0].toUpperCase()}
         </button>
       )}
 
@@ -93,13 +96,14 @@ export const LoggedUser = ({
           </span>
         </div>
         <ul className="flex flex-col gap-1">
-          <li>
+          <li
+            className={`navbar-logged--user__sub-items ${isActive(
+              '/profile'
+            )} `}
+          >
             <Link href="/profile">
-              <a
-                className={`navbar-logged--user__sub-items ${isActive(
-                  '/profile'
-                )} `}
-              >
+              <a className="flex items-center gap-2">
+                <ImProfile size={20} />
                 Perfil
               </a>
             </Link>
@@ -112,7 +116,7 @@ export const LoggedUser = ({
               onClick={handleLogout}
               className="navbar-logged--user__sub-items flex w-full justify-center hover:text-rose-600 hover:dark:text-rose-600"
             >
-              <BiLogOutCircle size={30} />
+              <BiLogOutCircle size={20} />
             </a>
           </li>
         </ul>

@@ -17,27 +17,27 @@ export const ProductItem = ({ product }: ProductItemProps) => {
         />
 
         <div className="px-5 pb-5">
-          <div className="flex justify-between">
+          <div className="flex items-center justify-between">
             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-              {product.title}
+              {product.title.toUpperCase()}
             </h5>
             {product.inStock > 0 ? (
               <span className="text-sm text-rose-500">
-                Em estoque: {product.inStock}
+                Estoque: {product.inStock}
               </span>
             ) : (
               <span className="text-rose-500">Esgotado</span>
             )}
           </div>
 
-          <p className="text-md my-4 text-ellipsis text-gray-400">
+          <p className="text-md my-4 h-28 text-ellipsis text-gray-400 ">
             {product.description.length > 100
-              ? `${product.description.substring(0, 90)}...`
+              ? `${product.description.substring(0, 170)}...`
               : product.description}
           </p>
 
           <div className="flex items-center justify-between">
-            <span className="text-3xl font-bold text-amber-600">
+            <span className="text-3xl font-bold text-emerald-600">
               R$ {product.price}
             </span>
 

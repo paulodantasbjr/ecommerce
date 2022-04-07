@@ -4,7 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { BiMenu } from 'react-icons/bi'
+import { BiMenu, BiHome, BiCart } from 'react-icons/bi'
+import { FaSignInAlt } from 'react-icons/fa'
 
 import { GlobalContext } from '../store/GlobalState'
 import { LoggedUser } from './LoggedUser'
@@ -56,22 +57,27 @@ export const NavBar = () => {
           } w-full items-center justify-between md:flex md:w-auto`}
         >
           <ul className="mt-4 flex flex-col md:mt-0 md:flex-row md:items-center md:space-x-8 md:text-sm md:font-medium">
-            <li>
+            <li className={`${isActive('/')} navbar-menu__items `}>
               <Link href="/">
-                <a className={`${isActive('/')} navbar-menu__items `}>Inicio</a>
+                <a className="flex items-center gap-1 md:flex-col">
+                  <BiHome size={20} />
+                  Inicio
+                </a>
               </Link>
             </li>
-            <li>
+            <li className={`${isActive('/cart')} navbar-menu__items `}>
               <Link href="/cart">
-                <a className={`${isActive('/cart')} navbar-menu__items `}>
+                <a className="flex items-center gap-1 md:flex-col">
+                  <BiCart size={20} />
                   Carrinho
                 </a>
               </Link>
             </li>
             {!state.auth.token ? (
-              <li>
+              <li className={`${isActive('/signin')} navbar-menu__items`}>
                 <Link href="/signin">
-                  <a className={`${isActive('/signin')} navbar-menu__items`}>
+                  <a className="flex items-center gap-1 md:flex-col">
+                    <FaSignInAlt size={20} />
                     Entrar
                   </a>
                 </Link>

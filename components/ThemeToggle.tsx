@@ -22,7 +22,7 @@ export const ThemeToggle = () => {
         } navbar-toggletheme__items`}
         onClick={() => setTheme('light')}
       >
-        <BiSun size={30} />
+        <BiSun size={20} />
       </button>
       <button
         className={`${
@@ -30,7 +30,7 @@ export const ThemeToggle = () => {
         } navbar-toggletheme__items `}
         onClick={() => setTheme('dark')}
       >
-        <BiMoon size={30} />
+        <BiMoon size={20} />
       </button>
     </div>
   )
