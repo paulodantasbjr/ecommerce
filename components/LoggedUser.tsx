@@ -21,38 +21,19 @@ export const LoggedUser = ({
   auth,
   isActive,
 }: LoggedUserProps) => {
-  const [isMobile, setIsMobile] = useState(false)
-
-  const { dispatch } = useContext(GlobalContext)
-
-  const checkMobile = () => {
-    if (window.innerWidth < 768) {
-      setIsMobile(true)
-    } else {
-      setIsMobile(false)
-    }
-  }
+  const { state, dispatch } = useContext(GlobalContext)
 
   const handleLogout = () => {
     Cookie.remove('refreshToken', { path: 'api/auth/accessToken' })
     localStorage.removeItem('firstLogin')
     dispatch({ type: 'AUTH', payload: {} })
-    toast.success('Desconectado realizado com sucesso!', {
-      autoClose: 1000,
-      closeButton: true,
-    })
+    toast.success('Desconectado realizado com sucesso!')
     return Router.push('/')
   }
 
-  useEffect(() => {
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
   return (
     <div className="relative flex items-center">
-      {isMobile ? (
+      {state.isMobile ? (
         <div className={`${isActive('/profile')} navbar-menu__items w-full `}>
           <Link href="#">
             <a

@@ -14,6 +14,11 @@ export const reducers = (state: State, action: Action) => {
         ...state,
         cart: action.payload,
       }
+    case ACTIONS.MOBILE:
+      return {
+        ...state,
+        isMobile: action.payload,
+      }
     default:
       return state
   }

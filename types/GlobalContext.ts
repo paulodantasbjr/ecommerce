@@ -7,6 +7,7 @@ import { CartProps } from './Cart'
 type GlobalStateProps = {
   auth: AuthProps
   cart: CartProps
+  isMobile: Boolean
 }
 
 export type GlobalContextProps = {

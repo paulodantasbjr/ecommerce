@@ -16,6 +16,9 @@ export const Layout = ({ children }: LayoutProps) => {
       <ToastContainer
         position="bottom-center"
         theme={`${theme === 'dark' ? 'dark' : 'light'}`}
+        pauseOnHover={false}
+        autoClose={1000}
+        closeButton={true}
       />
     </div>
   )

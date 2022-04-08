@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import { FaCcPaypal } from 'react-icons/fa'
+import { IoMdArrowBack } from 'react-icons/io'
 
 import { addCart } from '../../utils/addCart'
 import { GlobalContext } from '../../store/GlobalState'
@@ -13,6 +14,7 @@ import { getData } from '../../service'
 
 import { Action } from '../../types/Reducers'
 import { ProductItemProps } from '../../types/ProductItem'
+import Link from 'next/link'
 
 const DetailsProduct = ({ product }: ProductItemProps) => {
   const [productItem] = useState(product)
@@ -41,6 +43,15 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
         <title>{productItem.title}</title>
       </Head>
       <div className="grid grid-cols-1 p-2 md:grid-cols-2 md:p-8">
+        {state.isMobile && (
+          <div className="cursor-pointer p-2">
+            <Link href={'/'}>
+              <a>
+                <IoMdArrowBack size={20} />
+              </a>
+            </Link>
+          </div>
+        )}
         <div className="flex flex-col gap-2">
           <div className="relative h-96 w-full rounded-lg border-4 border-double border-amber-500 dark:border-amber-100">
             <Image
@@ -49,6 +60,7 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
               layout="fill"
               objectFit="fill"
               objectPosition="top"
+              priority
             />
           </div>
 
@@ -66,7 +78,8 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
                     layout="fill"
                     alt={image.url}
                     onClick={() => setTab(index)}
-                    className="cursor-pointer rounded-lg "
+                    className="cursor-pointer rounded-lg"
+                    priority
                   />
                 </div>
               )
@@ -104,9 +117,9 @@ const DetailsProduct = ({ product }: ProductItemProps) => {
             <button
               type="button"
               onClick={handleCart}
-              className=" rounded-3xl bg-red-500 py-2 px-8 text-white hover:brightness-150"
+              className="mx-10 flex-1 rounded-lg bg-emerald-700 px-7 py-3 text-center text-sm font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-4 focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800"
             >
-              comprar agora
+              Comprar agora
             </button>
           </div>
         </div>

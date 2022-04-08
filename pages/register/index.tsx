@@ -75,8 +75,8 @@ const Register: NextPage = () => {
       <Head>
         <title>Register Page</title>
       </Head>
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="mt-4 rounded  bg-white px-8 py-6 text-left shadow-lg dark:bg-gray-800">
+      <div className="flex h-full items-center justify-center">
+        <div className="rounded  bg-white px-8 py-6 text-left shadow-lg dark:bg-gray-800">
           <h3 className="text-center text-2xl font-bold">
             Login to your account
           </h3>

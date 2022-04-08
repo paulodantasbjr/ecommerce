@@ -13,8 +13,23 @@ export const DataProvider = ({ children }: DataProviderProps) => {
   const initialState = {
     auth: {},
     cart: [],
+    isMobile: false,
   }
   const [state, dispatch] = useReducer(reducers, initialState)
+
+  const checkMobile = () => {
+    if (window.innerWidth < 768) {
+      dispatch({
+        type: 'MOBILE',
+        payload: true,
+      })
+    } else {
+      dispatch({
+        type: 'MOBILE',
+        payload: false,
+      })
+    }
+  }
 
   const fetchUser = async () => {
     const firstLogin = window.localStorage.getItem('firstLogin')
@@ -32,7 +47,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
       }
 
       if (result.error) {
-        toast.error(result.error, { autoClose: 1000, closeButton: true })
+        toast.error(result.error)
       }
     }
   }
@@ -56,6 +71,12 @@ export const DataProvider = ({ children }: DataProviderProps) => {
   useEffect(() => {
     window.localStorage.setItem('__cart__eco__', JSON.stringify(state.cart))
   }, [state.cart])
+
+  useEffect(() => {
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
     <GlobalContext.Provider value={{ state, dispatch }}>
