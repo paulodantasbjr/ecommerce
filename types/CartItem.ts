@@ -1,10 +1,10 @@
 import { Dispatch } from 'react'
 
 import { Action } from './Reducers'
-import { ProductModelProps } from './ProductModel'
+import { CartProps } from './Cart'
 
 export type CartItemProps = {
-  item: ProductModelProps
-  cart: ProductModelProps[]
+  item: CartProps
+  cart: CartProps[]
   dispatch: Dispatch<Action>
 }

@@ -1,8 +1,8 @@
 export const decrease = (data, id) => {
   const newData = [...data]
   newData.forEach((item) => {
-    if (item.id === id) {
-      item.quantity -= 1
+    if (item._id === id) {
+      item.quantity--
     }
   })
   return {

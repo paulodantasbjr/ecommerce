@@ -6,7 +6,7 @@ import { CartProps } from './Cart'
 
 type GlobalStateProps = {
   auth: AuthProps
-  cart: CartProps
+  cart: CartProps[]
   isMobile: Boolean
 }
 
