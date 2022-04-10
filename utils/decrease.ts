@@ -1,4 +1,6 @@
-export const decrease = (data, id) => {
+import { CartProps } from '../types/Cart'
+
+export const decrease = (data: CartProps[], id: string) => {
   const newData = [...data]
   newData.forEach((item) => {
     if (item._id === id) {
