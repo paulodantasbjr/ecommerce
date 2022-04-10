@@ -25,8 +25,8 @@ module.exports = {
     ]
   },
   env: {
-    // BASE_URL: 'http://localhost:3000',
-    BASE_URL: 'https://ecommerce-paulodantasrj.vercel.app',
+    BASE_URL: 'http://localhost:3000',
+    // BASE_URL: 'https://ecommerce-paulodantasrj.vercel.app',
     MONGO_URL:
       'mongodb+srv://admin:admin@cluster0.dyw74.mongodb.net/ecommerce?retryWrites=true&w=majority',
     ACCESS_TOKEN_SECRET: 'token_secret',

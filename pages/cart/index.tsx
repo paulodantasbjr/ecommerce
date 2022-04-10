@@ -18,6 +18,7 @@ const Cart: NextPage = () => {
       }, 0)
       setTotal(res)
     }
+    getTotal()
   }, [state.cart])
 
   if (state.cart.length === 0) {
