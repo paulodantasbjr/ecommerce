@@ -11,15 +11,13 @@ const Cart: NextPage = () => {
   const [total, setTotal] = useState(0)
   const { state, dispatch } = useContext(GlobalContext)
 
-  const getTotal = () => {
-    const res = state.cart.reduce((prev, item) => {
-      return prev + item.price * item.quantity
-    }, 0)
-    setTotal(res)
-  }
-
   useEffect(() => {
-    getTotal()
+    const getTotal = () => {
+      const res = state.cart.reduce((prev, item) => {
+        return prev + item.price * item.quantity
+      }, 0)
+      setTotal(res)
+    }
   }, [state.cart])
 
   if (state.cart.length === 0) {
