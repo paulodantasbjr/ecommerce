@@ -8,6 +8,6 @@ export type CartProps = {
   category: string
   inStock: number
   sold: number
-  quantity?: number
+  quantity: number | 1
   checked: boolean
 }
