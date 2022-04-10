@@ -5,7 +5,7 @@ import { ACTIONS } from '../store/Actions'
 import { CartProps } from '../types/Cart'
 import { ProductModelProps } from '../types/ProductModel'
 
-export const addCart = (product: ProductModelProps, cart: CartProps) => {
+export const addCart = (product: ProductModelProps, cart: CartProps[]) => {
   if (product.inStock === 0) {
     return toast.error('Produto esgotado')
   }

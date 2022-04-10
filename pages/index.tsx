@@ -7,9 +7,9 @@ import Head from 'next/head'
 import { getData } from '../service'
 import { ProductItem } from '../components/ProductItem'
 
-import { ProductsProps } from '../types/Products'
+import { ItemProps } from '../types/Item'
 
-const Home: NextPage<ProductsProps> = ({ products, result }: ProductsProps) => {
+const Home: NextPage<ItemProps> = ({ products, result }: ItemProps) => {
   const [productsItems, setProductsItems] = useState(products)
 
   return (

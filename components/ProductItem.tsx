@@ -3,11 +3,11 @@ import { useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { addCart } from '../utils/addCart'
 import { GlobalContext } from '../store/GlobalState'
 
-import { ProductItemProps } from '../types/ProductItem'
 import { Action } from '../types/Reducers'
-import { addCart } from '../utils/addCart'
+import { ProductItemProps } from '../types/ProductItem'
 
 export const ProductItem = ({ product }: ProductItemProps) => {
   const { state, dispatch } = useContext(GlobalContext)

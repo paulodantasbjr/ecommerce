@@ -12,6 +12,6 @@ export type ProductItemProps = {
     inStock: number
     sold: number
     checked: boolean
-    quantity?: number
+    quantity?: number | 1
   }
 }

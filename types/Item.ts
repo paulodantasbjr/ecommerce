@@ -1,6 +1,6 @@
 import { ProductModelProps } from './ProductModel'
 
-export type ProductsProps = {
+export type ItemProps = {
   products: {
     _id: string
     title: string

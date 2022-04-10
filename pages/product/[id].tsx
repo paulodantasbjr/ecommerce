@@ -4,6 +4,7 @@ import type { GetServerSideProps } from 'next'
 
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { FaCcPaypal } from 'react-icons/fa'
 import { IoMdArrowBack } from 'react-icons/io'
@@ -14,7 +15,6 @@ import { getData } from '../../service'
 
 import { Action } from '../../types/Reducers'
 import { ProductItemProps } from '../../types/ProductItem'
-import Link from 'next/link'
 
 const DetailsProduct = ({ product }: ProductItemProps) => {
   const [productItem] = useState(product)

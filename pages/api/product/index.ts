@@ -11,14 +11,14 @@ export default async function handler(
 ) {
   switch (req.method) {
     case 'GET':
-      await getProducts(req, res)
+      await getProducts(res)
       break
     default:
       break
   }
 }
 
-const getProducts = async (req: NextApiRequest, res: NextApiResponse) => {
+const getProducts = async (res: NextApiResponse) => {
   try {
     const products = await Product.find()
 
