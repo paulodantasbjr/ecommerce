@@ -8,6 +8,6 @@ export type Action = {
 
 export type State = {
   auth: AuthProps
-  cart: CartProps
+  cart: CartProps[]
   isMobile: Boolean
 }
