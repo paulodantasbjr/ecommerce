@@ -6,6 +6,9 @@ import Image from 'next/image'
 
 import { CartItem } from '../../components/CartItem'
 import { GlobalContext } from '../../store/GlobalState'
+import { getData } from '../../service'
+
+import { ProductItemProps } from '../../types/ProductItem'
 
 const Cart: NextPage = () => {
   const [total, setTotal] = useState(0)
@@ -20,6 +23,29 @@ const Cart: NextPage = () => {
     }
     getTotal()
   }, [state.cart])
+
+  useEffect(() => {
+    const cartLocal = JSON.parse(localStorage.getItem('__cart__eco__') || '')
+    if (cartLocal) {
+      let newArr: ProductItemProps[] = []
+      const updateCart = async () => {
+        for (const item of cartLocal) {
+          const res = await getData(`product/${item._id}`)
+
+          if (res.product.inStock > 0) {
+            newArr.push({
+              ...res.product,
+              quantity: item.quantity > res.product.inStock ? 1 : item.quantity,
+            })
+          }
+        }
+
+        dispatch({ type: 'CART', payload: newArr })
+      }
+
+      updateCart()
+    }
+  }, [])
 
   if (state.cart.length === 0) {
     return (
