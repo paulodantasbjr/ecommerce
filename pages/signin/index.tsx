@@ -72,12 +72,12 @@ const Signin: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Login Page</title>
+        <title>Pagina de login</title>
       </Head>
       <div className="flex h-full items-center justify-center">
         <div className="rounded  bg-white px-8 py-6 text-left shadow-lg dark:bg-gray-800 ">
           <h3 className="text-center text-2xl font-bold">
-            Login to your account
+            Entre com sua conta
           </h3>
           <form onSubmit={handleSubmit}>
             <div className="mt-4">
@@ -109,7 +109,7 @@ const Signin: NextPage = () => {
               </div>
               <div className="flex items-baseline justify-between">
                 <button type="submit" className="auth-button">
-                  Login
+                  Entrar
                 </button>
                 <Link href="/register">
                   <a className="auth-link--page">Cadastrar-se</a>

@@ -78,11 +78,11 @@ const Register: NextPage = () => {
       <div className="flex h-full items-center justify-center">
         <div className="rounded  bg-white px-8 py-6 text-left shadow-lg dark:bg-gray-800">
           <h3 className="text-center text-2xl font-bold">
-            Login to your account
+            Cadastre-se no sistema
           </h3>
           <form onSubmit={handleSubmit}>
             <div className="mt-4">
-              <div>
+              <div className="mt-4">
                 <label className="block" htmlFor="name">
                   Nome
                 </label>
@@ -94,7 +94,7 @@ const Register: NextPage = () => {
                   className="auth-input"
                 />
               </div>
-              <div>
+              <div className="mt-4">
                 <label className="block" htmlFor="email">
                   Email
                 </label>
@@ -135,7 +135,7 @@ const Register: NextPage = () => {
                   Cadastrar
                 </button>
                 <Link href="/signin">
-                  <a className="auth-link--page ">Signin</a>
+                  <a className="auth-link--page ">Voltar</a>
                 </Link>
               </div>
             </div>
